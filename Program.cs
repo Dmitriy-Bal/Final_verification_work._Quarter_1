@@ -19,11 +19,34 @@ using static System.Console;
 
 Clear();
 
+// 1. вводим переменные
 string[] array = inputArray();
-string[] result = FindLess(array, 3);
-WriteLine($"Начальный массив: [{string.Join(", ", array)}]");
-WriteLine($"Итоговый массив: [{string.Join(", ", result)}]");
+string[] result = FindLess(array, 3); // ограничиваем ввод по 3-й элемент включительно
 
+// 2. ввод элементов начального массива
+string[] inputArray()
+{
+    Write("Введите элементы начального массива через пробел: ");
+    return ReadLine().Split(" ");
+}
+
+// 3. производим перебор начального массива
+int CountLess(string[] input, int x)
+{
+    int count = 0;
+
+    for(int i = 0; i < input.Length; i++)
+    {
+        if(input[i].Length <= x)
+        {
+            count++;
+        }
+    }
+
+    return count;
+}
+
+// 4. выбираем элементы,согласно условию задачи, из начального массива в итоговый
 string[] FindLess(string[] input, int x)
 {
     string[] output = new string[CountLess(input, x)];
@@ -40,23 +63,6 @@ string[] FindLess(string[] input, int x)
     return output;
 }
 
-int CountLess(string[] input, int x)
-{
-    int count = 0;
-
-    for(int i = 0; i < input.Length; i++)
-    {
-        if(input[i].Length <= x)
-        {
-            count++;
-        }
-    }
-
-    return count;
-}
-
-string[] inputArray()
-{
-    Write("Введите элементы начального массива через пробел: ");
-    return ReadLine().Split(" ");
-}
+// 5. вывод массивов
+WriteLine($"Начальный массив: [{string.Join(", ", array)}]");
+WriteLine($"Итоговый массив: [{string.Join(", ", result)}]");
